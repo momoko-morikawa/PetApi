@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.spring.pet.model.Pet;
+import com.example.spring.pet.model.PetUpdateRequest;
 
 @Service
 public class PetService {
@@ -32,12 +33,31 @@ public class PetService {
 		pets.add(pet);
 	}
 	
-	//ステータスで絞り込み
-	public Pet findByStatus(String status){
+	//IDで指定したペットの更新
+	public void updateById(int id, PetUpdateRequest request) {
 		for(int i = 0; i < pets.size(); i++) {
-			if(pets.get(i).getStatus().equals(status)) {
+			if(id == pets.get(i).getId()) {
+				pets.get(i).setName(request.getName());
+				pets.get(i).setStatus(request.getStatus());
+			}
+		}
+	}
+	
+	//IDでペット検索
+	public Pet findById(int id) {
+		for(int i = 0; i < pets.size(); i++) {
+			if(id == pets.get(i).getId()) {
 				return pets.get(i);
 			}
 		}return null;
+	}
+	
+	//ペット削除
+	public void deletePet(int id) {
+		for(int i = 0; i < pets.size(); i++) {
+			if(id == pets.get(i).getId()) {
+				pets.remove(i);
+			}
+		}
 	}
 }

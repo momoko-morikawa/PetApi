@@ -2,6 +2,7 @@ package com.example.spring.pet.model;
 
 import java.util.List;
 
+
 public class Pet {
 	private int id;
 	private Category categpry;
@@ -123,4 +124,7 @@ public class Pet {
 		}
 		
 	}
+	
+	
 }
+
