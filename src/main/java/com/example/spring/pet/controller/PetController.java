@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spring.pet.model.Pet;
@@ -34,6 +35,11 @@ public class PetController {
 	@PutMapping("/pet")
 	public void updatePet(@RequestBody Pet pet) {
 		petService.updatePet(pet);
+	}
+	
+	@GetMapping("/pet/findByStatus")
+	public List<Pet> findByStatus(@RequestParam List<String> status){
+		return petService.findByStatus(status);
 	}
 	
 	@PostMapping("/pet/{petId}")

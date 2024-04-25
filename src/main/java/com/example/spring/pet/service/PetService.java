@@ -60,4 +60,15 @@ public class PetService {
 			}
 		}
 	}
+	
+	//ステータスで絞り込み
+	public List<Pet> findByStatus(List<String> status){
+		List<Pet> filteredPets = new ArrayList<>();
+		for(Pet pet : pets) {
+			if(status.contains(pet.getStatus())) {
+				filteredPets.add(pet);
+			}
+		}
+		return filteredPets.isEmpty() ? null : filteredPets;
+	}
 }
