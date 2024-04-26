@@ -3,6 +3,7 @@ package com.example.spring.pet.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +41,15 @@ public class PetController {
 	@GetMapping("/pet/findByStatus")
 	public List<Pet> findByStatus(@RequestParam List<String> status){
 		return petService.findByStatus(status);
+	}
+	
+	@GetMapping("/pet/findByTags")
+	public ResponseEntity<List<Pet>> findByTags(@RequestParam(name = "tags") List<String> tags) {
+		List<Pet> filteredPets = petService.findByTags(tags);
+		if(filteredPets.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(filteredPets);
 	}
 	
 	@PostMapping("/pet/{petId}")

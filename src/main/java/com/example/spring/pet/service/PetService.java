@@ -71,4 +71,19 @@ public class PetService {
 		}
 		return filteredPets.isEmpty() ? null : filteredPets;
 	}
+	
+	//タグで絞り込み
+	public List<Pet> findByTags(List<String> tag){
+		List<Pet> filteredByTag = new ArrayList<>();
+		for(Pet pet : pets) {
+			List<Pet.Tag> petTags = pet.getTags();
+			for(Pet.Tag petTag : petTags) {
+				if(tag.contains(petTag.getName())) {
+					filteredByTag.add(pet);
+					break;
+				}
+			}
+		}
+		return filteredByTag;
+	}
 }
